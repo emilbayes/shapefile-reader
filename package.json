@@ -1,0 +1,41 @@
+{
+  "name": "shapefile-reader",
+  "version": "0.1.0",
+  "description": "Streaming Shapefile reader",
+  "main": "shapefile-reader.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "dependencies": {
+    "inherits": "^2.0.1"
+  },
+  "devDependencies": {
+    "standard": "^5.3.1",
+    "tape": "^4.2.0"
+  },
+  "scripts": {
+    "pretest": "standard",
+    "test": "tape test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emilbayes/shapefile-reader.git"
+  },
+  "keywords": [
+    "shapefile-stream",
+    "streaming",
+    "shapefile",
+    "shp",
+    "shx",
+    "dbf",
+    "gis",
+    "geo"
+  ],
+  "author": "Emil Bay <github@tixz.dk>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emilbayes/shapefile-reader/issues"
+  },
+  "homepage": "https://github.com/emilbayes/shapefile-reader#readme"
+}
