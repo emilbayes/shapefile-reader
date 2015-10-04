@@ -1,0 +1,19 @@
+{
+	"header": {
+		"fileCode": 9994,
+		"fileLength": 100,
+		"version": 1000,
+		"shapeType": "polyLine",
+		"boundingBox": {
+			"xMin": 0,
+			"yMin": 0,
+			"xMax": 0,
+			"yMax": 0,
+			"zMin": 0,
+			"zMax": 0,
+			"mMin": 0,
+			"mMax": 0
+		}
+	},
+	"items": []
+}

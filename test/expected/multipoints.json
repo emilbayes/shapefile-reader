@@ -1,0 +1,19 @@
+{
+	"header": {
+		"fileCode": 9994,
+		"fileLength": 356,
+		"version": 1000,
+		"shapeType": "multiPoint",
+		"boundingBox": {
+			"xMin": 1,
+			"yMin": 2,
+			"xMax": 19,
+			"yMax": 20,
+			"zMin": 0,
+			"zMax": 0,
+			"mMin": 0,
+			"mMax": 0
+		}
+	},
+	"items": []
+}

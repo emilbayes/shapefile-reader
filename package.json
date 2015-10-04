@@ -11,12 +11,14 @@
     "inherits": "^2.0.1"
   },
   "devDependencies": {
+    "interpreted": "^0.6.0",
+    "endpoint": "^0.4.x",
     "standard": "^5.3.1",
-    "tape": "^4.2.0"
+    "tap": "^2.0.0"
   },
   "scripts": {
     "pretest": "standard",
-    "test": "tape test/*.js"
+    "test": "tap test/*.js"
   },
   "repository": {
     "type": "git",
