@@ -1,8 +1,5 @@
 'use strict'
 
-const SHP_INT = 4
-const SHP_DOUBLE = 8
-
 const SHAPE_TYPES = {
   0: 'nullShape',
   1: 'point',
@@ -22,58 +19,90 @@ const SHAPE_TYPES = {
 
 // const NO_DATA = -1e38
 
+const assert = require('assert')
 const stream = require('stream')
 const inherits = require('inherits')
 
 module.exports = ShapefileStream
 
 inherits(ShapefileStream, stream.Readable)
-function ShapefileStream (opts) {
-  if (!(this instanceof ShapefileStream)) return new ShapefileStream(opts)
+function ShapefileStream (files, options) {
+  if (!(this instanceof ShapefileStream)) return new ShapefileStream(files)
+  stream.Readable.call(this, Object.assign({ objectMode: true }, options))
 
-  if (!opts || !opts.shapefile) throw new Error('Missing `shapefile` option')
+  // Validate input
+  if (typeof files !== 'object' || files === null) {
+    throw new TypeError('first argument must be an object of file streams')
+  }
+  if (!files.shp) throw new Error('No shp property is set')
 
-  stream.Readable.call(this, opts)
-
-  this._inBody = false
-
-  this._shpStream = opts.shapefile
-
-  const self = this
-  // When the source stream ends, end this stream
-  this._shpStream.on('end', () => self.push(null))
-  // When the source stream becomes readable, "refresh" this stream
-  this._shpStream.on('readable', () => self.read(0))
-
+  this._files = files
   this.header = null
+
+  // State
+  this._inBody = false
 }
 
-ShapefileStream.prototype._read = function (bytes) {
-  if (!this._inBody) {
-    // Header is 100 bytes
-    const chunk = this._shpStream.read(100)
+ShapefileStream.prototype._readBytes = function (stream, bytes, callback) {
+  const chunk = stream.read(bytes)
+  if (chunk !== null) {
+    assert(chunk.length === bytes) // dev assert, should be removed once well tested
+    return callback(null, chunk)
+  }
 
-    // If not available, wait until we can read the full headers
-    if (chunk === null) return this.push('')
+  stream.once('readable', function () {
+    const chunk = stream.read(bytes)
+    assert(chunk.length === bytes) // dev assert, should be removed once well tested
+    callback(null, chunk)
+  })
+}
 
-    this.header = {
-      fileCode: chunk.readIntBE(0, SHP_INT),
-      fileLength: chunk.readIntBE(24, SHP_INT),
-      version: chunk.readIntLE(28, SHP_INT),
-      shapeType: SHAPE_TYPES[chunk.readIntLE(32, SHP_INT)],
+ShapefileStream.prototype._readHeader = function (callback) {
+  const self = this
+  this._readBytes(this._files.shp, 100, function (err, chunk) {
+    if (err) return callback(err)
+
+    self.header = {
+      fileCode: chunk.readInt32BE(0, true),
+      fileLength: chunk.readInt32BE(24, true) * 2,
+      version: chunk.readInt32LE(28, true),
+      shapeType: SHAPE_TYPES[chunk.readInt32LE(32, true)],
       boundingBox: {
-        xMin: chunk.readDoubleLE(36, SHP_DOUBLE),
-        yMin: chunk.readDoubleLE(44, SHP_DOUBLE),
-        xMax: chunk.readDoubleLE(52, SHP_DOUBLE),
-        yMax: chunk.readDoubleLE(60, SHP_DOUBLE),
-        zMin: chunk.readDoubleLE(68, SHP_DOUBLE),
-        zMax: chunk.readDoubleLE(76, SHP_DOUBLE),
-        mMin: chunk.readDoubleLE(84, SHP_DOUBLE),
-        mMax: chunk.readDoubleLE(92, SHP_DOUBLE)
+        xMin: chunk.readDoubleLE(36, true),
+        yMin: chunk.readDoubleLE(44, true),
+        xMax: chunk.readDoubleLE(52, true),
+        yMax: chunk.readDoubleLE(60, true),
+        zMin: chunk.readDoubleLE(68, true),
+        zMax: chunk.readDoubleLE(76, true),
+        mMin: chunk.readDoubleLE(84, true),
+        mMax: chunk.readDoubleLE(92, true)
       }
     }
 
-    this.emit('header', this.header)
-    this._inBody = true
+    self.emit('header', self.header)
+    self._inBody = true
+    callback(null)
+  })
+}
+
+ShapefileStream.prototype._readFragment = function (callback) {
+  this.push(null)
+  callback(null)
+}
+
+ShapefileStream.prototype._read = function () {
+  const self = this
+
+  if (!this._inBody) {
+    this._readHeader(function (err) {
+      if (err) return self.emit('error', err)
+      self._readFragment(done)
+    })
+  } else {
+    self._readFragment(done)
+  }
+
+  function done (err) {
+    if (err) return self.emit('error', err)
   }
 }
