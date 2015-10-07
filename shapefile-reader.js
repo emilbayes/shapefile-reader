@@ -85,7 +85,7 @@ ShapefileStream.prototype._readHeader = function (callback) {
   })
 }
 
-ShapefileStream.prototype._readFragment = function (callback) {
+ShapefileStream.prototype._readRecord = function (callback) {
   this.push(null)
   callback(null)
 }
@@ -96,10 +96,10 @@ ShapefileStream.prototype._read = function () {
   if (!this._inBody) {
     this._readHeader(function (err) {
       if (err) return self.emit('error', err)
-      self._readFragment(done)
+      self._readRecord(done)
     })
   } else {
-    self._readFragment(done)
+    self._readRecord(done)
   }
 
   function done (err) {
