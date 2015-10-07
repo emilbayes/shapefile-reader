@@ -89,9 +89,22 @@ ShapefileStream.prototype._readHeader = function (callback) {
   })
 }
 
-ShapefileStream.prototype._readRecord = function (callback) {
-  this.push(null)
-  callback(null)
+ShapefileStream.prototype._readRecordHeader = function (callback) {
+  const self = this
+
+  this._readBytes(this._files.shp, 8, function (err, chunk) {
+    if (err) return callback(err)
+
+    const recordNumber = chunk.readInt32BE(0, true)
+    const recordLength = chunk.readInt32BE(4, true)
+
+    self._readRecord(recordLength, function (err, record) {
+      if (err) return callback(err)
+
+      self.push(record)
+      self.emit('record', Object.assign({recordNumber}, record))
+    })
+  })
 }
 
 ShapefileStream.prototype._read = function () {
@@ -100,13 +113,30 @@ ShapefileStream.prototype._read = function () {
   if (!this._inBody) {
     this._readHeader(function (err) {
       if (err) return self.emit('error', err)
-      self._readRecord(done)
+      self._readRecordHeader(done)
     })
   } else {
-    self._readRecord(done)
+    self._readRecordHeader(done)
   }
 
   function done (err) {
     if (err) return self.emit('error', err)
   }
+}
+
+ShapefileStream.prototype._readRecord = function (recordLength, callback) {
+  this._readBytes(this._files.shp, recordLength, function (err, chunk) {
+    if (err) return callback(err)
+
+    const shapeType = SHAPE_TYPES[chunk.readInt32LE(0, true)]
+
+    switch (shapeType) {
+      case 'nullShape':
+        return callback({shapeType})
+
+      default:
+        // Should probably be custom error. Maybe RecordTypeError
+        return callback(TypeError('Unknown record type'))
+    }
+  })
 }
