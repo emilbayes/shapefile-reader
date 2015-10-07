@@ -59,11 +59,15 @@ ShapefileStream.prototype._readBytes = function (stream, bytes, callback) {
 
 ShapefileStream.prototype._readHeader = function (callback) {
   const self = this
+
+  // Shapefile header is always 100 bytes
   this._readBytes(this._files.shp, 100, function (err, chunk) {
     if (err) return callback(err)
 
     self.header = {
       fileCode: chunk.readInt32BE(0, true),
+      // File length is counted in 16-bit words, meaning we need to double
+      // the number to get bytes
       fileLength: chunk.readInt32BE(24, true) * 2,
       version: chunk.readInt32LE(28, true),
       shapeType: SHAPE_TYPES[chunk.readInt32LE(32, true)],
