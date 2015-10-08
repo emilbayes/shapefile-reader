@@ -15,5 +15,7 @@
 			"mMax": 0
 		}
 	},
-	"items": []
+	"items": [
+		{"type": "point", "point": { "x": 3, "y": 4} }
+	]
 }
