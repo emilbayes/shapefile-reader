@@ -15,5 +15,69 @@
 			"mMax": 0
 		}
 	},
-	"items": []
+	"items": [
+		{
+			"type": "point",
+			"point": {
+				"x": 1,
+				"y": 2
+			}
+		},
+		{
+			"type": "point",
+			"point": {
+				"x": 3,
+				"y": 4
+			}
+		},
+		{
+			"type": "point",
+			"point": {
+				"x": 5,
+				"y": 6
+			}
+		},
+		{
+			"type": "point",
+			"point": {
+				"x": 7,
+				"y": 8
+			}
+		},
+		{
+			"type": "point",
+			"point": {
+				"x": 9,
+				"y": 10
+			}
+		},
+		{
+			"type": "point",
+			"point": {
+				"x": 11,
+				"y": 12
+			}
+		},
+		{
+			"type": "point",
+			"point": {
+				"x": 13,
+				"y": 14
+			}
+		},
+		{
+			"type": "point",
+			"point": {
+				"x": 15,
+				"y": 16
+			}
+		},
+		{
+			"type": "point",
+			"point": {
+				"x": 17,
+				"y": 18
+			}
+		}
+	]
 }
