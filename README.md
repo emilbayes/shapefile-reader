@@ -1,5 +1,5 @@
-`shapefile-reader` - WIP
-========================
+`shapefile-reader` - WIP [![Build Status][1]][2]
+================================================
 
 > Streaming Shapefile reader
 
@@ -32,3 +32,6 @@ License
 
 * [ISC](LICENSE)
 * Test Shapefiles courtesy of Mike Bostock's [`shapefile` module](https://github.com/mbostock/shapefile)
+
+  [1]: https://travis-ci.org/emilbayes/shapefile-reader.svg?branch=master
+  [2]: https://travis-ci.org/emilbayes/shapefile-reader

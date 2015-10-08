@@ -1,0 +1,7 @@
+sudo: false
+language: node_js
+node_js:
+- '4'
+- 'node' # Should be latest
+notifications:
+  email: false
