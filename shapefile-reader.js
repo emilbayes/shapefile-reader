@@ -4,6 +4,7 @@
 
 const async = require('async')
 const stream = require('stream')
+const endpoint = require('endpoint')
 const inherits = require('inherits')
 const ShpReader = require('./lib/shp-reader.js')
 const DbfReader = require('./lib/dbf-reader.js')
@@ -24,6 +25,7 @@ function ShapefileStream (files, options) {
   this.headers = null
 
   // Create readers
+  this._files = files
   this._shpReader = new ShpReader(files.shp)
   this._dbfReader = new DbfReader(files.dbf)
 
@@ -32,10 +34,27 @@ function ShapefileStream (files, options) {
 }
 
 ShapefileStream.prototype._readHeader = function (callback) {
-  async.parallel({
-    shp: (done) => this._shpReader.readHeader(done),
-    bdf: (done) => this._dbfReader.readHeader(done)
-  }, callback)
+  const self = this
+
+  // read character encoding from .cpg
+  if (this._files.hasOwnProperty('cpg')) {
+    this._files.cpg.pipe(endpoint(function (err, buffer) {
+      if (err) return callback(err)
+
+      self._dbfReader.setEncoding(buffer.toString('ascii'))
+      phase2()
+    }))
+  } else {
+    phase2()
+  }
+
+  // read header from .shp (contains shapes) and .bdf (contains properties)
+  function phase2 () {
+    async.parallel({
+      shp: (done) => self._shpReader.readHeader(done),
+      bdf: (done) => self._dbfReader.readHeader(done)
+    }, callback)
+  }
 }
 
 ShapefileStream.prototype._readRecord = function (callback) {

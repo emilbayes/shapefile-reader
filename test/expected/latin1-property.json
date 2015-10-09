@@ -1,21 +1,46 @@
 {
-	"header": {
-		"fileCode": 9994,
-		"fileLength": 128,
-		"version": 1000,
-		"shapeType": "point",
-		"boundingBox": {
-			"xMin": 3,
-			"yMin": 4,
-			"xMax": 3,
-			"yMax": 4,
-			"zMin": 0,
-			"zMax": 0,
-			"mMin": 0,
-			"mMax": 0
+	"headers": {
+		"shp": {
+			"fileCode": 9994,
+			"fileLength": 128,
+			"version": 1000,
+			"shapeType": "point",
+			"boundingBox": {
+				"xMin": 3,
+				"yMin": 4,
+				"xMax": 3,
+				"yMax": 4,
+				"zMin": 0,
+				"zMax": 0,
+				"mMin": 0,
+				"mMax": 0
+			}
+		},
+		"bdf": {
+			"fileVersion": 3,
+			"date": "1995-07-25T22:00:00.000Z",
+			"recordCount": 1,
+			"headerSize": 65,
+			"recordSize": 81,
+			"fieldDescriptors": [
+				{
+					"name": "name",
+					"type": "C",
+					"length": 80
+				}
+			]
 		}
 	},
 	"items": [
-		{"type": "point", "point": { "x": 3, "y": 4} }
+		{
+			"type": "point",
+			"point": {
+				"x": 3,
+				"y": 4
+			},
+			"properties": {
+				"name": "México"
+			}
+		}
 	]
 }

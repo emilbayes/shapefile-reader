@@ -8,11 +8,13 @@
     "test": "test"
   },
   "dependencies": {
-    "inherits": "^2.0.1"
+    "async": "^1.4.2",
+    "endpoint": "^0.4.x",
+    "inherits": "^2.0.1",
+    "iconv-lite": "^0.4.13"
   },
   "devDependencies": {
     "interpreted": "^0.6.0",
-    "endpoint": "^0.4.x",
     "standard": "^5.3.1",
     "tap": "^2.0.0"
   },
