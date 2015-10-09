@@ -1,23 +1,74 @@
 {
-	"header": {
-		"fileCode": 9994,
-		"fileLength": 184,
-		"version": 1000,
-		"shapeType": "point",
-		"boundingBox": {
-			"xMin": 1,
-			"yMin": 2,
-			"xMax": 7,
-			"yMax": 8,
-			"zMin": 0,
-			"zMax": 0,
-			"mMin": 0,
-			"mMax": 0
+	"headers": {
+		"bdf": {
+			"fileVersion": 3,
+			"date": "1995-07-25T22:00:00.000Z",
+			"recordCount": 3,
+			"headerSize": 97,
+			"recordSize": 91,
+			"fieldDescriptors": [
+				{
+					"name": "foo",
+					"type": "N",
+					"length": 10
+				},
+				{
+					"name": "bar",
+					"type": "C",
+					"length": 80
+				}
+			]
+		},
+		"shp": {
+			"fileCode": 9994,
+			"fileLength": 184,
+			"version": 1000,
+			"shapeType": "point",
+			"boundingBox": {
+				"xMin": 1,
+				"yMin": 2,
+				"xMax": 7,
+				"yMax": 8,
+				"zMin": 0,
+				"zMax": 0,
+				"mMin": 0,
+				"mMax": 0
+			}
 		}
 	},
 	"items": [
-		{"type": "point", "point": { "x": 1, "y": 2} },
-		{"type": "point", "point": { "x": 3, "y": 4} },
-		{"type": "point", "point": { "x": 7, "y": 8} }
+		{
+			"type": "point",
+			"point": {
+				"x": 1,
+				"y": 2
+			},
+			"properties": {
+				"foo": null,
+				"bar": null
+			}
+		},
+		{
+			"type": "point",
+			"point": {
+				"x": 3,
+				"y": 4
+			},
+			"properties": {
+				"foo": 42,
+				"bar": null
+			}
+		},
+		{
+			"type": "point",
+			"point": {
+				"x": 7,
+				"y": 8
+			},
+			"properties": {
+				"foo": null,
+				"bar": "blue"
+			}
+		}
 	]
 }

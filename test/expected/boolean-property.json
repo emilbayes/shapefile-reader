@@ -1,29 +1,126 @@
 {
-	"header": {
-		"fileCode": 9994,
-		"fileLength": 352,
-		"version": 1000,
-		"shapeType": "point",
-		"boundingBox": {
-			"xMin": 1,
-			"yMin": 2,
-			"xMax": 17,
-			"yMax": 18,
-			"zMin": 0,
-			"zMax": 0,
-			"mMin": 0,
-			"mMax": 0
+	"headers": {
+		"bdf": {
+			"fileVersion": 3,
+			"date": "1995-07-25T22:00:00.000Z",
+			"recordCount": 9,
+			"headerSize": 65,
+			"recordSize": 2,
+			"fieldDescriptors": [
+				{
+					"name": "foo",
+					"type": "L",
+					"length": 1
+				}
+			]
+		},
+		"shp": {
+			"fileCode": 9994,
+			"fileLength": 352,
+			"version": 1000,
+			"shapeType": "point",
+			"boundingBox": {
+				"xMin": 1,
+				"yMin": 2,
+				"xMax": 17,
+				"yMax": 18,
+				"zMin": 0,
+				"zMax": 0,
+				"mMin": 0,
+				"mMax": 0
+			}
 		}
 	},
 	"items": [
-		{"type": "point", "point": { "x": 1, "y": 2} },
-		{"type": "point", "point": { "x": 3, "y": 4} },
-		{"type": "point", "point": { "x": 5, "y": 6} },
-		{"type": "point", "point": { "x": 7, "y": 8} },
-		{"type": "point", "point": { "x": 9, "y": 10} },
-		{"type": "point", "point": { "x": 11, "y": 12} },
-		{"type": "point", "point": { "x": 13, "y": 14} },
-		{"type": "point", "point": { "x": 15, "y": 16} },
-		{"type": "point", "point": { "x": 17, "y": 18 } }
+		{
+			"type": "point",
+			"point": {
+				"x": 1,
+				"y": 2
+			},
+			"properties": {
+				"foo": null
+			}
+		},
+		{
+			"type": "point",
+			"point": {
+				"x": 3,
+				"y": 4
+			},
+			"properties": {
+				"foo": true
+			}
+		},
+		{
+			"type": "point",
+			"point": {
+				"x": 5,
+				"y": 6
+			},
+			"properties": {
+				"foo": true
+			}
+		},
+		{
+			"type": "point",
+			"point": {
+				"x": 7,
+				"y": 8
+			},
+			"properties": {
+				"foo": false
+			}
+		},
+		{
+			"type": "point",
+			"point": {
+				"x": 9,
+				"y": 10
+			},
+			"properties": {
+				"foo": false
+			}
+		},
+		{
+			"type": "point",
+			"point": {
+				"x": 11,
+				"y": 12
+			},
+			"properties": {
+				"foo": true
+			}
+		},
+		{
+			"type": "point",
+			"point": {
+				"x": 13,
+				"y": 14
+			},
+			"properties": {
+				"foo": true
+			}
+		},
+		{
+			"type": "point",
+			"point": {
+				"x": 15,
+				"y": 16
+			},
+			"properties": {
+				"foo": false
+			}
+		},
+		{
+			"type": "point",
+			"point": {
+				"x": 17,
+				"y": 18
+			},
+			"properties": {
+				"foo": false
+			}
+		}
 	]
 }

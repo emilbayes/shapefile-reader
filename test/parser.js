@@ -11,8 +11,10 @@ interpreted({
   expected: path.resolve(__dirname, 'expected'),
 
   readSource: false,
-  update: true,
-  run: ['null'],
+  // update: true,
+  run: ['null', 'points', 'multipoints', 'empty', 'date-property',
+        'boolean-property', 'mixed-properties', 'number-property',
+        'string-property'],
 
   test: function (name, callback) {
     const dirPath = path.resolve(__dirname, 'source', name)

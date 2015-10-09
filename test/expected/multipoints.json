@@ -1,28 +1,44 @@
 {
-	"header": {
-		"fileCode": 9994,
-		"fileLength": 356,
-		"version": 1000,
-		"shapeType": "multiPoint",
-		"boundingBox": {
-			"xMin": 1,
-			"yMin": 2,
-			"xMax": 19,
-			"yMax": 20,
-			"zMin": 0,
-			"zMax": 0,
-			"mMin": 0,
-			"mMax": 0
+	"headers": {
+		"bdf": {
+			"fileVersion": 3,
+			"date": "1995-07-25T22:00:00.000Z",
+			"recordCount": 2,
+			"headerSize": 65,
+			"recordSize": 12,
+			"fieldDescriptors": [
+				{
+					"name": "FID",
+					"type": "N",
+					"length": 11
+				}
+			]
+		},
+		"shp": {
+			"fileCode": 9994,
+			"fileLength": 356,
+			"version": 1000,
+			"shapeType": "multiPoint",
+			"boundingBox": {
+				"xMin": 1,
+				"yMin": 2,
+				"xMax": 19,
+				"yMax": 20,
+				"zMin": 0,
+				"zMax": 0,
+				"mMin": 0,
+				"mMax": 0
+			}
 		}
 	},
 	"items": [
 		{
 			"type": "multiPoint",
 			"box": {
-				"Xmin": 1,
-				"Ymin": 2,
-				"Xmax": 9,
-				"Ymax": 10
+				"xMin": 1,
+				"yMin": 2,
+				"xMax": 9,
+				"yMax": 10
 			},
 			"points": [
 				{
@@ -45,15 +61,18 @@
 					"x": 9,
 					"y": 10
 				}
-			]
+			],
+			"properties": {
+				"FID": 0
+			}
 		},
 		{
 			"type": "multiPoint",
 			"box": {
-				"Xmin": 11,
-				"Ymin": 12,
-				"Xmax": 19,
-				"Ymax": 20
+				"xMin": 11,
+				"yMin": 12,
+				"xMax": 19,
+				"yMax": 20
 			},
 			"points": [
 				{
@@ -76,7 +95,10 @@
 					"x": 19,
 					"y": 20
 				}
-			]
+			],
+			"properties": {
+				"FID": 1
+			}
 		}
 	]
 }
