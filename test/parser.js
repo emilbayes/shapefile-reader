@@ -14,7 +14,8 @@ interpreted({
   // update: true,
   run: ['null', 'points', 'multipoints', 'empty', 'date-property',
         'boolean-property', 'mixed-properties', 'number-property',
-        'string-property', 'latin1-property', 'utf8-property'],
+        'string-property', 'latin1-property', 'utf8-property',
+        'ignore-properties'],
 
   test: function (name, callback) {
     const dirPath = path.resolve(__dirname, 'source', name)

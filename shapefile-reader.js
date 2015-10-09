@@ -27,7 +27,7 @@ function ShapefileStream (files, options) {
   // Create readers
   this._files = files
   this._shpReader = new ShpReader(files.shp)
-  this._dbfReader = new DbfReader(files.dbf)
+  if (files.dbf) this._dbfReader = new DbfReader(files.dbf)
 
   // State
   this._inBody = false
@@ -50,29 +50,41 @@ ShapefileStream.prototype._readHeader = function (callback) {
 
   // read header from .shp (contains shapes) and .bdf (contains properties)
   function phase2 () {
-    async.parallel({
-      shp: (done) => self._shpReader.readHeader(done),
-      bdf: (done) => self._dbfReader.readHeader(done)
-    }, callback)
+    // always read .shp
+    const jobs = {
+      shp: (done) => self._shpReader.readHeader(done)
+    }
+
+    // if .dbf exists, read that too
+    if (self._dbfReader) {
+      jobs.bdf = (done) => self._dbfReader.readHeader(done)
+    }
+
+    // read headers
+    async.parallel(jobs, callback)
   }
 }
 
 ShapefileStream.prototype._readRecord = function (callback) {
-  async.parallel({
-    shp: (done) => this._shpReader.readRecord(done),
-    dbf: (done) => this._dbfReader.readRecord(done)
-  }, function (err, record) {
-    if (err) return callback(err)
+  if (this._dbfReader) {
+    async.parallel({
+      shp: (done) => this._shpReader.readRecord(done),
+      dbf: (done) => this._dbfReader.readRecord(done)
+    }, function (err, record) {
+      if (err) return callback(err)
 
-    if (record.shp === null && record.dbf === null) {
-      callback(null, null)
-    } else if (record.shp !== null && record.dbf !== null) {
-      record.shp.properties = record.dbf
-      callback(null, record.shp)
-    } else {
-      callback(new Error('.shp and .bdf don\'t have the same amount of records'))
-    }
-  })
+      if (record.shp === null && record.dbf === null) {
+        callback(null, null)
+      } else if (record.shp !== null && record.dbf !== null) {
+        record.shp.properties = record.dbf
+        callback(null, record.shp)
+      } else {
+        callback(new Error('.shp and .bdf don\'t have the same amount of records'))
+      }
+    })
+  } else {
+    this._shpReader.readRecord(callback)
+  }
 }
 
 ShapefileStream.prototype._read = function () {
