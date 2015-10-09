@@ -11,7 +11,8 @@ interpreted({
   expected: path.resolve(__dirname, 'expected'),
 
   readSource: false,
-  // update: true,
+  update: true,
+  run: ['null'],
 
   test: function (name, callback) {
     const dirPath = path.resolve(__dirname, 'source', name)
@@ -34,7 +35,7 @@ interpreted({
 
         // done, also add the header to the dataset
         callback(null, {
-          header: reader.header,
+          headers: reader.headers,
           items: items
         })
       }))
