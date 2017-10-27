@@ -12,6 +12,10 @@ interpreted({
 
   readSource: false,
   // update: true,
+  run: ['null', 'points', 'multipoints', 'empty', 'date-property',
+        'boolean-property', 'mixed-properties', 'number-property',
+        'string-property', 'latin1-property', 'utf8-property',
+        'ignore-properties', 'dagi_kommune'],
 
   test: function (name, callback) {
     const dirPath = path.resolve(__dirname, 'source', name)
@@ -33,11 +37,15 @@ interpreted({
         if (err) return callback(err)
 
         // done, also add the header to the dataset
-        callback(null, {
-          header: reader.header,
+        callback(null, jsonNormalize({
+          headers: reader.headers,
           items: items
-        })
+        }))
       }))
     })
   }
 })
+
+function jsonNormalize (obj) {
+  return JSON.parse(JSON.stringify(obj))
+}

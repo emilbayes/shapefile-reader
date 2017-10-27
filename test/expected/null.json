@@ -1,18 +1,34 @@
 {
-	"header": {
-		"fileCode": 9994,
-		"fileLength": 288,
-		"version": 1000,
-		"shapeType": "point",
-		"boundingBox": {
-			"xMin": 1,
-			"yMin": 2,
-			"xMax": 17,
-			"yMax": 18,
-			"zMin": 0,
-			"zMax": 0,
-			"mMin": 0,
-			"mMax": 0
+	"headers": {
+		"bdf": {
+			"fileVersion": 3,
+			"date": "1995-07-26T00:00:00.000Z",
+			"recordCount": 9,
+			"headerSize": 65,
+			"recordSize": 12,
+			"fieldDescriptors": [
+				{
+					"name": "FID",
+					"type": "N",
+					"length": 11
+				}
+			]
+		},
+		"shp": {
+			"fileCode": 9994,
+			"fileLength": 288,
+			"version": 1000,
+			"shapeType": "point",
+			"boundingBox": {
+				"xMin": 1,
+				"yMin": 2,
+				"xMax": 17,
+				"yMax": 18,
+				"zMin": 0,
+				"zMax": 0,
+				"mMin": 0,
+				"mMax": 0
+			}
 		}
 	},
 	"items": [
@@ -21,29 +37,47 @@
 			"point": {
 				"x": 1,
 				"y": 2
+			},
+			"properties": {
+				"FID": 0
 			}
 		},
 		{
-			"type": "nullShape"
+			"type": "nullShape",
+			"properties": {
+				"FID": 1
+			}
 		},
 		{
 			"type": "point",
 			"point": {
 				"x": 5,
 				"y": 6
+			},
+			"properties": {
+				"FID": 2
 			}
 		},
 		{
-			"type": "nullShape"
+			"type": "nullShape",
+			"properties": {
+				"FID": 3
+			}
 		},
 		{
-			"type": "nullShape"
+			"type": "nullShape",
+			"properties": {
+				"FID": 4
+			}
 		},
 		{
 			"type": "point",
 			"point": {
 				"x": 11,
 				"y": 12
+			},
+			"properties": {
+				"FID": 5
 			}
 		},
 		{
@@ -51,16 +85,25 @@
 			"point": {
 				"x": 13,
 				"y": 14
+			},
+			"properties": {
+				"FID": 6
 			}
 		},
 		{
-			"type": "nullShape"
+			"type": "nullShape",
+			"properties": {
+				"FID": 7
+			}
 		},
 		{
 			"type": "point",
 			"point": {
 				"x": 17,
 				"y": 18
+			},
+			"properties": {
+				"FID": 8
 			}
 		}
 	]
